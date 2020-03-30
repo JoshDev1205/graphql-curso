@@ -2,6 +2,7 @@ import { GraphQLServer } from 'graphql-yoga'
 import Query from './resolvers/Query'
 import Author from './resolvers/Author'
 import Book from './resolvers/Book'
+import Mutation from './resolvers/Mutation'
 
 import db from './db'
 
@@ -9,6 +10,7 @@ const resolvers = {
   Query,
   Author,
   Book,
+  Mutation,
 }
 
 const context = {

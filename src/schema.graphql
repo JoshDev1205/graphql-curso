@@ -10,6 +10,7 @@ type User {
   id: ID!
   name: String!
   lastName: String!
+  email: String!
 }
 
 type Author {
@@ -28,4 +29,20 @@ type Book {
   price: Int!
   writted_by: Author!
   register_by: User!
+}
+
+type Mutation {
+  createUser(
+    name: String!
+    lastName: String!
+    email: String!
+    password: String!
+  ): User!
+  updateUser(
+    id: ID!
+    name: String
+    lastName: String
+    email: String
+    password: String
+  ): User!
 }
