@@ -9,7 +9,7 @@ type Query {
 type User {
   id: ID!
   name: String!
-  lastName: String!
+  lastname: String!
   email: String!
 }
 
@@ -43,20 +43,36 @@ type Mutation {
 
 type Subscription {
   count: Int!
+  author: AuthorSubscriptionPayload!
+  book(authorId: ID!): BookSubscriptionPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type AuthorSubscriptionPayload {
+  mutation: MutationType!
+  data: Author!
+}
+
+type BookSubscriptionPayload {
+  mutation: MutationType!
+  data: Book!
 }
 
 input createUserInput {
   name: String!
-  lastName: String!
+  lastname: String!
   email: String!
-  password: String!
 }
 
 input updateUserInput {
   name: String
-  lastName: String
+  lastname: String
   email: String
-  password: String
 }
 
 input createAuthorInput {

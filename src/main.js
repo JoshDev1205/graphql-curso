@@ -4,8 +4,11 @@ import Author from './resolvers/Author'
 import Book from './resolvers/Book'
 import Mutation from './resolvers/Mutation'
 import Subscription from './resolvers/Subscription'
+import { PrismaClient } from '@prisma/client'
 
 import db from './db'
+
+const prisma = new PrismaClient()
 
 const pubsub = new PubSub()
 
@@ -20,6 +23,7 @@ const resolvers = {
 const context = {
   db,
   pubsub,
+  prisma,
 }
 
 const server = new GraphQLServer({

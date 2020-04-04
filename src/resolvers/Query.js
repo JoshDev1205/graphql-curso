@@ -5,28 +5,38 @@ const Query = {
     return `Hello ${name || 'world'}`
   },
   quantity: () => 1,
-  user: (parent, { id }, ctx, info) => {
-    const { db } = ctx
-
+  user: (parent, { id }, { prisma }, info) => {
     if (!id) {
-      return db.users
+      return prisma.users.findMany()
     }
 
-    return db.users.filter(user => user.id === id)
+    return prisma.users.findOne({
+      where: {
+        id,
+      },
+    })
   },
-  author: (parent, { id }, { db }, info) => {
+  author: (parent, { id }, { prisma }, info) => {
     if (!id) {
-      return db.authors
+      return prisma.authors.findMany()
     }
 
-    return db.authors.filter(author => author.id === id)
+    return prisma.authors.findOne({
+      where: {
+        id,
+      },
+    })
   },
-  book: (parent, { id }, { db }, info) => {
+  book: (parent, { id }, { prisma }, info) => {
     if (!id) {
-      return db.books
+      return prisma.books.findMany()
     }
 
-    return db.books.filter(book => book.id === id)
+    return prisma.books.findOne({
+      where: {
+        id,
+      },
+    })
   },
 }
 
