@@ -8,31 +8,32 @@ datasource db {
 }
 
 model authors {
-  country     String
+  country     String?
   id          Int     @default(autoincrement()) @id
-  name        String
-  register_by Int
-  users       users  @relation(fields: [register_by], references: [id])
+  name        String?
+  register_by Int?
+  users       users?  @relation(fields: [register_by], references: [id])
   books       books[]
 }
 
 model books {
-  description String
+  description String?
   id          Int      @default(autoincrement()) @id
-  price       Int
-  quantity    Int
-  register_by Int
-  title       String
-  writted_by  Int
-  users       users   @relation(fields: [register_by], references: [id])
-  authors     authors @relation(fields: [writted_by], references: [id])
+  price       Int?
+  quantity    Int?
+  register_by Int?
+  title       String?
+  writted_by  Int?
+  users       users?   @relation(fields: [register_by], references: [id])
+  authors     authors? @relation(fields: [writted_by], references: [id])
 }
 
 model users {
   email    String    @unique
   id       Int       @default(autoincrement()) @id
-  lastname String
-  name     String
+  lastname String?
+  name     String?
+  password String?
   authors  authors[]
   books    books[]
 }
