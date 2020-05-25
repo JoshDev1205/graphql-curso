@@ -1,58 +1,58 @@
-import { getUserId } from '../utils'
+import { getUserId } from "../utils";
 
 const Query = {
   hello: (parent, args, ctx, info) => {
-    const { name } = args
+    const { name } = args;
 
-    return `Hello ${name || 'world'}`
+    return `Hello ${name || "world"}`;
   },
   quantity: () => 1,
   user: (parent, { id }, { request, prisma }, info) => {
-    const userId = getUserId(request)
+    const userId = getUserId(request);
 
     if (!id) {
-      return prisma.users.findMany()
+      return prisma.users.findMany();
     }
 
     return prisma.users.findOne({
       where: {
-        id,
+        id: Number(id),
       },
-    })
+    });
   },
   author: (parent, { id, first, skip, orderBy }, { request, prisma }, info) => {
-    const userId = getUserId(request)
+    const userId = getUserId(request);
 
     if (!id) {
       return prisma.authors.findMany({
         first,
         skip,
         orderBy,
-      })
+      });
     }
 
-    return prisma.authors.findOne({
+    return prisma.authors.findMany({
       where: {
-        id,
+        id: Number(id),
       },
-    })
+    });
   },
   book: (parent, { id, first, skip, orderBy }, { request, prisma }, info) => {
-    const userId = getUserId(request)
+    const userId = getUserId(request);
     if (!id) {
       return prisma.books.findMany({
         first,
         skip,
         orderBy,
-      })
+      });
     }
 
-    return prisma.books.findOne({
+    return prisma.books.findMany({
       where: {
-        id,
+        id: Number(id),
       },
-    })
+    });
   },
-}
+};
 
-export default Query
+export default Query;
